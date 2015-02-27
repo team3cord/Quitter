@@ -1,4 +1,4 @@
-var db = require('../db');
+var db = require('../node/db');
 
 var Post = db.model('Post', {
     username : {type : String, require : true},

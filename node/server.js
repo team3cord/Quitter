@@ -11,7 +11,12 @@ app.get('/api/posts', function(req, res){
            body : 'This is from the server'
        }
    ]);
-
+app.post('/api/posts', function(req, res){
+    console.log('post received');
+    console.log(req.body.username);
+    console.log(req.body.body);
+    res.send(201);
+});
 
 });
 

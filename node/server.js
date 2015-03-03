@@ -1,35 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var Post = require('../models/post');
 
 var app = express();
 app.use(bodyParser.json());
-
-app.get('/', function(req, res){
-    res.sendFile('/Users/matthewcordeiro/Desktop/PCS-projects/Quitter/layouts/posts.html');
-});
-app.get('/api/posts', function(req, res, next) {
-    Post.find(function (err, posts) {
-        if (err) {
-            return next(err)
-        }
-        res.json(posts);
-    });
-});
-app.post('/api/posts', function(req, res, next){
-    var post = new Post({
-        username : req.body.username,
-        body : req.body.body
-    });
-    post.save(function(err, post){
-        if(err) {return next(err)}
-        res.status(201).json(post);
-    });
-//    console.log('post received');
-//    console.log(req.body.username);
-//    console.log(req.body.body);
-//    res.send(201);
-});
+app.use(require('../controllers/api/posts'));
+app.use(require('../controllers/static'));
 
 app.listen(3000, function(){
     console.log('Server is listening on port ', 3000);

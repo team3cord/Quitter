@@ -24,7 +24,7 @@
         $scope.addPost = function () {
             if ($scope.postBody) {
                 $http.post('/api/posts', {
-                    username: "Thadeus Polevault",
+                    username: "Default User",
                     body: $scope.postBody
                 })
                         .success(function (post) {

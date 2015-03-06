@@ -10,7 +10,7 @@ gulp.task('hello',['welcome'], function () {
 });
 
 gulp.task('js', function(){
-    gulp.src('ng/**/*.js')
+    gulp.src(['ng/module.js','ng/**/*.js'])
         .pipe(concat('app.js'))
         .pipe(gulp.dest('assets'));
 });

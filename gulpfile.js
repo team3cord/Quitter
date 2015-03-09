@@ -25,7 +25,8 @@ gulp.task('watch:js', ['js'], function(){
 gulp.task('dev:server', function(){
     nodemon({
         script: 'server.js',
-        ect:    'js'
+        ect:    'js',
+        ignore: ['ng*', 'gulp*', 'assets*']
     });
 });
 

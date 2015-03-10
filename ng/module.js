@@ -1,3 +1,5 @@
-var quitterApp = angular.module('quitterApp', []);
+var quitterApp = angular.module('quitterApp', [
+    'ngRoute'
+]);
 
 

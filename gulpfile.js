@@ -1,11 +1,11 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var ngAnnotate = require('gulp-ng-annotate');
-var nodemon = require('gulp-nodemon');
-var sass = require('gulp-ruby-sass');
-var notify = require('gulp-notify');
-var bower = require('gulp-bower');
+var gulp = require('gulp'),
+concat = require('gulp-concat'),
+uglify = require('gulp-uglify'),
+ngAnnotate = require('gulp-ng-annotate'),
+nodemon = require('gulp-nodemon'),
+sass = require('gulp-ruby-sass'),
+notify = require('gulp-notify'),
+bower = require('gulp-bower'),
 var config = {
     sassPath: './resources/sass',
     bowerDir: './bower_components'

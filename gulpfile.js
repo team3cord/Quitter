@@ -6,8 +6,10 @@ nodemon = require('gulp-nodemon'),
 sass = require('gulp-ruby-sass'),
 notify = require('gulp-notify'),
 bower = require('gulp-bower'),
+gutil = require('gulp-util'),
+livereload = require('gulp-livereload');
 var config = {
-    sassPath: './resources/sass',
+    sassPath: './public/stylesheets/*.scss',
     bowerDir: './bower_components'
 };
 
@@ -34,20 +36,15 @@ gulp.task('bower', function(){
         .pipe(gulp.dest(config.bowerDir));
 });
 gulp.task('css', function(){
-    return gulp.src(config.sassPath + '/style.scss')
-        .pipe(sass({
-            style: 'compressed',
-            loadPath: [
-                './resources/sass',
-            //    config.bowerDir + '/bootstrap-sass-official/assets/stylesheets',
-                config.bowerDir + '/fontawesome/scss'
-            ]
-        })
-            .on('error', notify.onError(function(error){
-                return "Error: " + error.message;
-            })))
-        .pipe(gulp.dest('./css'));
-
+    gulp.src(config.sassPath)
+        .pipe(sass())
+        .pipe(concat('style.css'))
+        .pipe(gulp.dest('public'))
+        .pipe(livereload());
+});
+gulp.task('watch:css',['css'], function(){
+    livereload.listen();
+    gulp.watch('public/stylesheets/*.scss',['css']);
 });
 gulp.task('dev:server', function(){
     nodemon({
@@ -56,4 +53,10 @@ gulp.task('dev:server', function(){
         ignore: ['ng*', 'gulp*', 'assets*']
     });
 });
+gulp.task('default', function(){
+    gulp.watch('watch:js');
+    gulp.watch('watch:css');
+    gulp.watch('dev:server');
+});
+
 

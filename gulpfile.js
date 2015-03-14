@@ -3,7 +3,7 @@ concat = require('gulp-concat'),
 uglify = require('gulp-uglify'),
 ngAnnotate = require('gulp-ng-annotate'),
 nodemon = require('gulp-nodemon'),
-sass = require('gulp-ruby-sass'),
+sass = require('gulp-sass'),
 notify = require('gulp-notify'),
 bower = require('gulp-bower'),
 gutil = require('gulp-util'),
@@ -26,7 +26,7 @@ gulp.task('js', function(){
         .pipe(concat('app.js'))
         .pipe(ngAnnotate())
         .pipe(uglify())
-        .pipe(gulp.dest('assets'));
+        .pipe(gulp.dest('public'));
 });
 gulp.task('watch:js', ['js'], function(){
     gulp.watch('ng/**/*.js', ['js']);
@@ -53,10 +53,7 @@ gulp.task('dev:server', function(){
         ignore: ['ng*', 'gulp*', 'assets*']
     });
 });
-gulp.task('default', function(){
-    gulp.watch('watch:js');
-    gulp.watch('watch:css');
-    gulp.watch('dev:server');
+gulp.task('default',['watch:js','watch:css','dev:server'], function(){
 });
 
 

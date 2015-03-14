@@ -4,7 +4,7 @@ var //User = require('../models/user.js'),
 
 var secretKey = 'supersecretkey';
 
-router.get('/session',function(req,res){
+router.post('/session',function(req,res){
     var username = req.body.username,
         token = jwt.encode({username: username}, secretKey);
     res.json(token);

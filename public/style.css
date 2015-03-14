@@ -1,10 +1,19 @@
 body {
-  width: 88.6%;
+  width: 100%;
   font: 100% 'Raleway, san-serif';
   background-color: #7bc4d9;
-  color: #0f2b33;
-  padding: 5%;
-  border: 1px solid #0f2b33; }
+  color: #0f2b33; }
 
 h1 {
   font-size: 52px; }
+
+.slick-box {
+  display: block;
+  float: left;
+  width: 50%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #0f2b33;
+  padding: 5%; }

@@ -2,14 +2,26 @@ $bck-clr: #7bc4d9;
 $txt-clr: #0f2b33;
 $font-stack: 'Raleway, san-serif';
 
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
 body {
-  width: 88.6%;
+  width: 100%;
   font: 100% $font-stack;
   background-color: $bck-clr;
   color: $txt-clr;
-  padding: 5%;
-  border: 1px solid $txt-clr;
 }
 h1 {
   font-size: 52px;
+}
+.slick-box {
+  display: block;
+  float: left;
+  width: 50%;
+  @include border-radius(10px);
+  border: 1px solid $txt-clr;
+  padding: 5%;
 }

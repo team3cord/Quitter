@@ -5,6 +5,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(require('./controllers/api/posts'));
 app.use(require('./controllers/static'));
+app.use(express.static('./public/'));
 
 app.listen(3000, function(){
     console.log('Server is listening on port ', 3000);

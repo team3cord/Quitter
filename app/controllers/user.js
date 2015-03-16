@@ -1,4 +1,4 @@
-var //User = require('../models/user.js'),
+var User = require('../models/user.js'),
     jwt = require('jwt-simple'),
     router = require('express').Router(),
     _ = require('lodash'),

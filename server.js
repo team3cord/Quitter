@@ -6,7 +6,6 @@ app.use(bodyParser.json());
 app.use(require('./controllers/api/posts'));
 app.use(require('./controllers/static'));
 app.use(require('./app/controllers/user'));
-app.use(require('./app/models/user'));
 app.use(express.static('./public/'));
 
 app.listen(3000, function(){

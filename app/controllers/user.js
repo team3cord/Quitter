@@ -1,12 +1,24 @@
 var //User = require('../models/user.js'),
     jwt = require('jwt-simple'),
-    router = require('express').Router();
+    router = require('express').Router(),
+    _ = require('lodash');
 
-var secretKey = 'supersecretkey';
+var secretKey = 'supersecretkey',
+    users = [{username: 'Matthew Camaro', password: 'mypassword'}];
+
+function findUserByUsername(username){
+    return _.find(users, {username: username});
+}
+function validateUser(user, password){
+    return user.password === password;
+}
 
 router.post('/session',function(req, res){
-    var username = req.body.username,
-        token = jwt.encode({username: username}, secretKey);
+    var user = findUserByUsername(req.body.username);
+    if(!validateUser(user, req.body.password)){
+        return res.send(401) //Unauthorized
+    }
+    token = jwt.encode({username: user.username}, secretKey);
     res.json(token);
 });
 router.get('/user', function(req, res){

@@ -1,8 +1,8 @@
 var db =require('../../node/db');
 
 var User = db.model('User',{
-   username: String,
-    password: String
+    username: {type: String, required: true},
+    password: {type: String, required: true, select: false}
 });
 
 module.exports = User;

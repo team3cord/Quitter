@@ -3,7 +3,7 @@ angular.module('quitterApp')
     $scope.addPost = function () {
         if ($scope.postBody) {
             PostsSvc.create({
-                username: "Default User",
+                username: "mattc",
                 body: $scope.postBody
             })
                 .success(function (post) {

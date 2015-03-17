@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<body ng-app="quitterApp">
+<body ng-app="quitterApp" ng-controller="ApplicationCtrl">
     <nav class='navbar navbar-default'>
         <div class='container'>
             <ul class='nav navbar-nav'>
@@ -17,7 +17,7 @@
                 <li><a href='/#/register'>Register</a></li>
                 <li><a href='/#/login'>Login</a></li>
             </ul>
-            <p ng-if='currentUser' class='navbar-text navbar-right'>
+            <p ng-if='currentUser' style="display: block; float: right; background-color: #ffffff; padding: 25px;" class='myuser'>
                 Signed in as {{currentUser.username}}
             </p>
         </div>

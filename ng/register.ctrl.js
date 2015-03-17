@@ -6,6 +6,6 @@ angular.module('quitterApp')
                     $scope.$emit('login', user);
                     $location.path('/');
                 });
-        }
+        };
 
     });

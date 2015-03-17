@@ -4,6 +4,6 @@ angular.module('quitterApp')
             UserSvc.login(username, password)
                 .then(function(response){
                     $scope.$emit('login', response.data);
-                });
-        }
-    });
+        });
+    };
+});

@@ -2,13 +2,13 @@ angular.module('quitterApp')
     .service('UserSvc', function ($http) {
         var svc = this
         svc.getUser = function () {
-            return $http.get('/api/users')
+            return $http.get('/users')
                 .then(function (response) {
                     return response.data
                 });
         }
         svc.login = function (username, password) {
-            return $http.post('/api/sessions', {
+            return $http.post('/sessions', {
                 username: username, password: password
             }).then(function (response) {
                 svc.token = response.data
@@ -17,7 +17,7 @@ angular.module('quitterApp')
             });
         }
         svc.register = function (username, password) {
-            return $http.post('/api/users', {
+            return $http.post('/users', {
                 username: username, password: password
             }).then(function () {
                 return svc.login(username, password)

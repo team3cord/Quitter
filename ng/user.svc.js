@@ -14,6 +14,7 @@ angular.module('quitterApp')
                 svc.token = response.data;
                 $http.defaults.headers.common['X-Auth'] = response.data;
                 return svc.getUser();
+                console.log("our token:" + svc.token);
             });
         };
         svc.register = function (username, password) {

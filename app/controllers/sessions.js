@@ -15,6 +15,8 @@ router.post('/sessions', function(req, res, next){
             if(err){ return next(err); }
             if(!valid){ return res.sendStatus(401); }
                var token = jwt.encode({username : username}, config.secret);
+                console.log("this token:" + token);
+                //res.cookie.user = token;
                 res.send(token);
             });
         });

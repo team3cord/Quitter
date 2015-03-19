@@ -14,8 +14,6 @@ angular.module('quitterApp')
                 console.log("Res" + response.data);
                 $window.localStorage.setItem('access_token',response.data);
                 $http.defaults.headers.common['X-Auth'] = response.data;
-
-                //console.log("our token:" + svc.token);
                 return svc.getUser();
             });
         };

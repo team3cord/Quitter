@@ -1,5 +1,5 @@
 angular.module('quitterApp')
-    .service('UserSvc', function ($http) {
+    .service('UserSvc', function ($http, $window) {
         var svc = this;
         svc.getUser = function () {
             return $http.get('/users')
@@ -11,10 +11,12 @@ angular.module('quitterApp')
             return $http.post('/sessions', {
                 username: username, password: password
             }).then(function (response) {
-                svc.token = response.data;
+                console.log("Res" + response.data);
+                $window.localStorage.setItem('access_token',response.data);
                 $http.defaults.headers.common['X-Auth'] = response.data;
+
+                //console.log("our token:" + svc.token);
                 return svc.getUser();
-                console.log("our token:" + svc.token);
             });
         };
         svc.register = function (username, password) {

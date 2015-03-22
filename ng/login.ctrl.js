@@ -1,6 +1,6 @@
 angular.module('quitterApp')
-    .controller('LoginCtrl', function($scope, UserSvc, $location,$window){
-        $scope.login = function(username, password){
+    .controller('LoginCtrl', function(UserSvc, $location,$window){
+        this.login = function(username, password){
             UserSvc.login(username, password)
                 .then(function(user){
                     $scope.$emit('login', user);

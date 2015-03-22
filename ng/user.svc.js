@@ -23,5 +23,5 @@ angular.module('quitterApp')
             }).then(function () {
                 return svc.login(username, password);
             });
-        };
+        }
 });

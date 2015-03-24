@@ -7,6 +7,9 @@ body {
 h1 {
   font-size: 52px; }
 
+ul {
+  list-style: none; }
+
 .slick-box {
   display: block;
   float: left;
@@ -18,11 +21,21 @@ h1 {
   border: 1px solid #0f2b33;
   padding: 5%; }
 
+.list-group {
+  display: block;
+  background-color: #ff00ff;
+  width: 50%;
+  margin: 0 auto;
+  padding: 33px; }
+
+.post-wrap {
+  text-align: center; }
+
 .bigborder {
   display: block;
-  float: left;
+  margin: 0 auto;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   border-radius: 5px;
-  border: 4px solid #ff00ff; }
+  border: 4px solid #00ff00; }

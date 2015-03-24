@@ -29,7 +29,9 @@ ul {
   padding: 33px; }
 
 .post-wrap {
-  text-align: center; }
+  text-align: center;
+  color: #ffffff;
+  font-size: 40px; }
 
 .bigborder {
   display: block;

@@ -1,1 +1,121 @@
-var quitterApp=angular.module("quitterApp",["ngRoute"]);angular.module("quitterApp").controller("ApplicationCtrl",["$scope",function(t){t.$on("login",function(e,n){t.currentUser=n})}]),quitterApp.directive("mcenter",function(){return function(t,e,n){e.bind("mouseenter",function(){e.addClass(n.mcenter)})}}),quitterApp.directive("mcleave",function(){return function(t,e,n){e.bind("mouseleave",function(){e.removeClass(n.mcenter)})}}),angular.module("quitterApp").controller("LoginCtrl",["$scope","UserSvc","$location","$window",function(t,e,n,o){t.login=function(r,s){e.login(r,s).then(function(e){t.$emit("login",e),console.log(e),o.localStorage.token=e.token,n.path("/")})}}]),angular.module("quitterApp").controller("PostsCtrl",["$scope","PostsSvc",function(t,e){t.addPost=function(){t.postBody&&e.create({username:"mattc",body:t.postBody}).success(function(e){t.posts.unshift(e),t.postBody=null})},e.fetch().success(function(e){t.posts=e})}]),quitterApp.service("PostsSvc",["$http",function(t){this.fetch=function(){return t.get("http://localhost:3000/api/posts")},this.create=function(e){return console.log(e),t.post("http://localhost:3000/api/posts",e)}}]),angular.module("quitterApp").controller("RegisterCtrl",["$scope","UserSvc","$location",function(t,e,n){t.register=function(o,r){e.register(o,r).then(function(e){t.$emit("login",e),n.path("/")})}}]),angular.module("quitterApp").config(["$routeProvider",function(t){t.when("/",{controller:"PostsCtrl",templateUrl:"/templates/posts.html"}).when("/register",{controller:"RegisterCtrl",templateUrl:"/templates/register.html"}).when("/login",{controller:"LoginCtrl",templateUrl:"/templates/login.html"})}]),angular.module("quitterApp").service("UserSvc",["$http","$window",function(t,e){var n=this;n.getUser=function(){return t.get("/users").then(function(t){return t.data})},n.login=function(o,r){return t.post("/sessions",{username:o,password:r}).then(function(o){return console.log("Res"+o.data),e.localStorage.setItem("access_token",o.data),t.defaults.headers.common["X-Auth"]=o.data,n.getUser()})},n.register=function(e,o){return t.post("/users",{username:e,password:o}).then(function(){return n.login(e,o)})}}]);
+var quitterApp = angular.module('quitterApp', [
+    'ngRoute'
+]);
+
+
+angular.module('quitterApp')
+    .controller('ApplicationCtrl', ["$scope", function($scope){
+        $scope.$on('login', function(_, user){
+            $scope.currentUser = user;
+        });
+    }]);
+
+quitterApp.directive('mcenter', function(){
+    return function(scope, element, attrs){
+       element.bind('mouseenter', function(){
+           element.addClass(attrs.mcenter);
+       });
+    }
+});
+quitterApp.directive('mcleave', function(){
+    return function(scope, element, attrs){
+       element.bind('mouseleave', function(){
+           element.removeClass(attrs.mcenter);
+       });
+    }
+});
+
+
+angular.module('quitterApp')
+    .controller('LoginCtrl', ["$scope", "UserSvc", "$location", "$window", function($scope, UserSvc, $location,$window){
+        $scope.login = function(username, password){
+            UserSvc.login(username, password)
+                .then(function(user){
+                    $scope.$emit('login', user);
+                    console.log(user);
+                    $window.localStorage.token = user.token;
+                    $location.path('/');
+        });
+    };
+}]);
+
+angular.module('quitterApp')
+.controller('PostsCtrl', ["$scope", "PostsSvc", function ($scope, PostsSvc) {
+    $scope.addPost = function () {
+        if ($scope.postBody) {
+            PostsSvc.create({
+                username: "mattc",
+                body: $scope.postBody
+            })
+                .success(function (post) {
+                    $scope.posts.unshift(post)
+                    $scope.postBody = null;
+                });
+        }
+    }
+    PostsSvc.fetch()
+        .success(function(posts){
+            $scope.posts = posts
+        });
+
+}]);
+
+
+quitterApp
+.service('PostsSvc', ["$http", function($http){
+    this.fetch = function(){
+        return $http.get('http://localhost:3000/api/posts');
+    }
+    this.create = function(post){
+        console.log(post);
+        return $http.post('http://localhost:3000/api/posts', post);
+    }
+}]);
+
+angular.module('quitterApp')
+    .controller('RegisterCtrl', ["$scope", "UserSvc", "$location", function($scope, UserSvc, $location){
+        $scope.register = function (username, password){
+            UserSvc.register(username, password)
+                .then(function(user){
+                    $scope.$emit('login', user);
+                    $location.path('/');
+                });
+        };
+
+    }]);
+
+angular.module('quitterApp')
+    .config(["$routeProvider", function ($routeProvider){
+        $routeProvider
+            .when('/',         {controller: 'PostsCtrl', templateUrl: '/templates/posts.html'})
+            .when('/register', {controller: 'RegisterCtrl', templateUrl: '/templates/register.html'})
+            .when('/login',    {controller: 'LoginCtrl', templateUrl: '/templates/login.html'});
+}]);
+
+angular.module('quitterApp')
+    .service('UserSvc', ["$http", "$window", function ($http, $window) {
+        var svc = this;
+        svc.getUser = function () {
+            return $http.get('/users')
+                .then(function (response) {
+                    return response.data;
+                });
+        };
+        svc.login = function (username, password) {
+            return $http.post('/sessions', {
+                username: username, password: password
+            }).then(function (response) {
+                console.log("Res" + response.data);
+                $window.localStorage.setItem('access_token',response.data);
+                $http.defaults.headers.common['X-Auth'] = response.data;
+                return svc.getUser();
+            });
+        };
+        svc.register = function (username, password) {
+            return $http.post('/users', {
+                username: username, password: password
+            }).then(function () {
+                return svc.login(username, password);
+            });
+        }
+}]);

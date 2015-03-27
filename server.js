@@ -6,8 +6,8 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(require('./auth'));
-app.use(require('./controllers/api/posts'));
-app.use(require('./controllers/static'));
+app.use(require('./app/controllers/posts'));
+app.use(require('./app/controllers/static'));
 app.use(require('./app/controllers/sessions'));
 app.use(require('./app/controllers/user'));
 app.use(express.static('./public/'));

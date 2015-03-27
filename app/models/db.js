@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/quitter', function( ){
-    console.log('MongoDB connected.');
+    console.log('Quitter MongoDB connected.');
 });
 module.exports = mongoose;

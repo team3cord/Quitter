@@ -1,4 +1,4 @@
-var db =require('../../node/db');
+var db =require('./db');
 
 var User = db.model('User',{
     username: {type: String, required: true},

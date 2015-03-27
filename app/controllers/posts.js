@@ -1,4 +1,4 @@
-var Post   = require('../../models/post'),
+var Post   = require('../models/post'),
     ws     = require('../../websockets'),
     router = require('express').Router();
 

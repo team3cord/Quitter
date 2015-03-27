@@ -10,22 +10,6 @@ angular.module('quitterApp')
         });
     }]);
 
-quitterApp.directive('mcenter', function(){
-    return function(scope, element, attrs){
-       element.bind('mouseenter', function(){
-           element.addClass(attrs.mcenter);
-       });
-    }
-});
-quitterApp.directive('mcleave', function(){
-    return function(scope, element, attrs){
-       element.bind('mouseleave', function(){
-           element.removeClass(attrs.mcenter);
-       });
-    }
-});
-
-
 angular.module('quitterApp')
     .controller('LoginCtrl', ["$scope", "UserSvc", "$location", "$window", function($scope, UserSvc, $location,$window){
         $scope.login = function(username, password){
@@ -61,17 +45,6 @@ angular.module('quitterApp')
 }]);
 
 
-quitterApp
-.service('PostsSvc', ["$http", function($http){
-    this.fetch = function(){
-        return $http.get('http://localhost:3000/api/posts');
-    }
-    this.create = function(post){
-        console.log(post);
-        return $http.post('http://localhost:3000/api/posts', post);
-    }
-}]);
-
 angular.module('quitterApp')
     .controller('RegisterCtrl', ["$scope", "UserSvc", "$location", function($scope, UserSvc, $location){
         $scope.register = function (username, password){
@@ -90,6 +63,32 @@ angular.module('quitterApp')
             .when('/',         {controller: 'PostsCtrl', templateUrl: '/templates/posts.html'})
             .when('/register', {controller: 'RegisterCtrl', templateUrl: '/templates/register.html'})
             .when('/login',    {controller: 'LoginCtrl', templateUrl: '/templates/login.html'});
+}]);
+
+quitterApp.directive('mc-enter', function(){
+    return function(scope, element, attrs){
+       element.bind('mouseenter', function(){
+           element.addClass(attrs.mc-enter);
+       });
+    }
+});
+quitterApp.directive('mc-leave', function(){
+    return function(scope, element, attrs){
+       element.bind('mouseleave', function(){
+           element.removeClass(attrs.mc-enter);
+       });
+    }
+});
+
+quitterApp
+.service('PostsSvc', ["$http", function($http){
+    this.fetch = function(){
+        return $http.get('http://localhost:3000/api/posts');
+    }
+    this.create = function(post){
+        console.log(post);
+        return $http.post('http://localhost:3000/api/posts', post);
+    }
 }]);
 
 angular.module('quitterApp')

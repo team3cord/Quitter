@@ -5,6 +5,7 @@ var express = require('express'),
 var app = express();
 
 app.use(bodyParser.json());
+app.use(require('./auth'));
 app.use(require('./controllers/api/posts'));
 app.use(require('./controllers/static'));
 app.use(require('./app/controllers/sessions'));

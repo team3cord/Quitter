@@ -44,7 +44,7 @@ angular.module('quitterApp')
     $scope.addPost = function () {
         if ($scope.postBody) {
             PostsSvc.create({
-                username: "mattc",
+                username: 'mattc',
                 body: $scope.postBody
             })
                 .success(function (post) {
@@ -96,7 +96,9 @@ angular.module('quitterApp')
     .service('UserSvc', ["$http", "$window", function ($http, $window) {
         var svc = this;
         svc.getUser = function () {
-            return $http.get('/users')
+            return $http.get('/users',{
+                headers: {'X-Auth': this.token}
+            })
                 .then(function (response) {
                     return response.data;
                 });
@@ -105,8 +107,9 @@ angular.module('quitterApp')
             return $http.post('/sessions', {
                 username: username, password: password
             }).then(function (response) {
-                console.log("Res" + response.data);
-                $window.localStorage.setItem('access_token',response.data);
+           //     console.log("Res" + response.data);
+            //    $window.localStorage.setItem('access_token',response.data);
+                svc.token = response.data;
                 $http.defaults.headers.common['X-Auth'] = response.data;
                 return svc.getUser();
             });

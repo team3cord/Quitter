@@ -24,6 +24,13 @@ angular.module('quitterApp')
 }]);
 
 angular.module('quitterApp')
+    .controller('MemberListCtrl', ["$scope", "MemberListSvc", function($scope, MemberListSvc){
+        MemberListSvc.fetch()
+            .success(function(users){
+                $scope.members = users;
+            });
+    }]);
+angular.module('quitterApp')
 .controller('PostsCtrl', ["$scope", "PostsSvc", function ($scope, PostsSvc) {
     $scope.addPost = function () {
         if ($scope.postBody) {
@@ -80,6 +87,12 @@ quitterApp.directive('mc-leave', function(){
     }
 });
 
+quitterApp
+    .service('MemberListSvc', ["$http", function($http){
+        this.fetch = function(){
+            return $http.get('http://localhost:3000/member');
+        }
+    }]);
 quitterApp
 .service('PostsSvc', ["$http", function($http){
     this.fetch = function(){

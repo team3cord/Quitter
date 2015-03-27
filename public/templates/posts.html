@@ -1,4 +1,4 @@
-<div mcenter='bigborder' mcleave class="post-wrap">
+<div ng-controller='PostsCtrl' mcenter='bigborder' mcleave class="post-wrap">
     <h1 >Recent Posts</h1>
     <form role='form'>
     <div class='form-group'>
@@ -12,6 +12,7 @@
     </form>
     <ul  class='list-group'>
         <li ng-repeat="post in posts | orderBy:'-date'" class='list-group-item'>
+
             <strong>@{{ post.username }}</strong>
             <span>{{ post.body }}</span>
         </li>

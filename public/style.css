@@ -1,5 +1,6 @@
 body {
   width: 100%;
+  margin: 0;
   font: 100% 'Raleway, san-serif';
   background-color: #7bc4d9;
   color: #0f2b33; }
@@ -41,3 +42,27 @@ ul {
   -ms-border-radius: 5px;
   border-radius: 5px;
   border: 4px solid #00ff00; }
+
+.member-title {
+  text-align: center;
+  color: #FFFFF0; }
+
+.members-list li {
+  position: relative;
+  display: block;
+  float: left;
+  width: 30%;
+  margin: 1%;
+  border: 1px solid #102035; }
+
+.members-list img {
+  width: 100%; }
+
+.members-list strong {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  top: 15px;
+  font-size: 35px;
+  text-align: center;
+  color: #ff00ff; }

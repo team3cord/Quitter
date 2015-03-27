@@ -24,12 +24,13 @@
         </div>
     </nav>
     <div ng-controller="MemberListCtrl">
-        <h1>Quitter Members</h1>
+        <h1 class="member-title">Quitter Members</h1>
         <ul class="members-list">
             <li ng-repeat="user in members | orderBy: '-date'">
-                <img ng-src="imgs/hydralogo0.png">
-                <strong>{{user.username}}</strong>
-                <a href="/{{user.username}}">Member page</a>
+                <a href="/{{user.username}}">
+                    <img ng-src="imgs/hydralogo0.png">
+                    <strong>{{user.username}}</strong>
+                </a>
             </li>
         </ul>
 

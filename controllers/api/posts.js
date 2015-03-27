@@ -1,5 +1,6 @@
-var Post = require('../../models/post');
-var router = require('express').Router();
+var Post   = require('../../models/post'),
+    ws     = require('../../websockets'),
+    router = require('express').Router();
 
 
 router.get('/api/posts', function(req, res, next) {
@@ -19,6 +20,7 @@ router.post('/api/posts', function(req, res, next){
     });
     post.save(function(err, post){
         if(err) {return next(err)}
+        ws.broadcast('new_post', post);
         res.status(201).json(post);
     });
 });

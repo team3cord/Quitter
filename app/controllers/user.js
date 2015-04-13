@@ -29,4 +29,12 @@ router.post('/users',function(req, res, next){
     });
 });
 
+router.update('/users', function(req, res, next){
+  console.log(user);
+});
+router.delete('/users', function(req, res, next){
+  console.log(user);
+});
+
+
 module.exports = router;
